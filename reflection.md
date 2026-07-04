@@ -2,6 +2,17 @@
 
 ## 1. System Design
 
+Owner Three Core Actions:
+
+- Add a Pet
+- Create a Task (with or without constraints)
+- View Tasks
+
+Next Tasks:
+
+- Submit Tasks to the Scheduler
+- Mark Tasks complete
+
 **a. Initial design**
 
 - Briefly describe your initial UML design.
