@@ -7,10 +7,14 @@
   - What actions it can perform **(methods)**
 
 - Owner/User
-  - ID (unique)
-  - Name
-  - E-mail
-  - Pets -> Collection of Pet
+  - Attributes
+    - ID (unique)
+    - Name
+    - E-mail
+    - Pets -> Collection of Pet
+  - Methods
+    - Update Owner Info
+    - Create a Pet
 
 - Pet
   - ID
