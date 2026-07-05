@@ -8,42 +8,69 @@
 
 - Owner/User
   - Attributes
-    - ID (unique)
     - Name
-    - E-mail
     - Pets -> Collection of Pet
   - Methods
     - Update Owner Info
     - Create a Pet
 
 - Pet
-  - ID
-  - Name
-  - Tasks -> Collection of Task
-  - Create A Task
-    - Task Duration
-    - Task Priority
-  - Update A Task
-    - Change Priority
-    - Change Duration
-  - Delete a Task
+  - Attributes
+    - Name
+    - Species
+    - Tasks -> Collection of Task
+  - Methods
+    - Create Task -> Returns Task
+    - Display Tasks
+    - Update Task -> Returns Task
+    - Delete Task
 
 - Task
-  - ID
-  - Name
-  - Duration
-  - Priority
-  - Completion Status
-  - Change Duration
-  - Change Priority
-  - Change Completion Status
+  - Attributes
+    - Title
+    - Pet
+    - Duration
+    - Priority
+    - Completion Status
+    - Due Date
+  - Methods
+    - Change Duration -> Returns Task
+    - Change Priority -> Returns Task
+    - Change Completion Status -> Returns Task
 
 - Scheduler
-  - Schedule -> Collection of Tasks
-  - Create a Schedule
-  - Display Schedule
-  - Check Pets
-  - Update Schedule
+  - Attributes
+    - Schedule -> Collection of Task
+    - Pets -> Collection of Pet
+  - Methods
+    - Create a Schedule -> Returns Schedule
+    - Display Schedule
+    - Update Schedule -> Returns Schedule
+    - Delete A Schedule
+    - Get Tasks -> Returns Collection of Task
+    - Sort Tasks -> Returns Collection of Task
+      - By Priority
+      - By Duration
+    - Filter Tasks -> Returns Collection of Task
 
-Relationships:
-<!-- TODO: Ask AI Companions about updating Schedule based on changes in Pet or Task. -->
+## Building Block Relationships
+
+Owner:
+An Owner cares for zero, one, or many Pets.
+An Owner plans zero, one, or many Tasks for each Pet.
+An Owner tracks one or more Pets with the Scheduler.
+
+Pet:
+A Pet belongs to one Owner.
+A Pet has zero, one, or many Tasks.
+A Pet is reports by one Scheduler.
+
+Task:
+A Task belongs to one Pet.
+A Task reports to the Scheduler.
+
+Scheduler:
+A Scheduler manages one or many Tasks.
+A Scheduler tracks Pets.
+A Scheduler tracks Tasks.
+A Scheduler explains a schedule to the Owner.

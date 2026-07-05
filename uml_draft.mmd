@@ -1,0 +1,49 @@
+classDiagram
+    class Owner {
+        -name: String
+        -pets: Pet[]
+        +updateOwnerInfo()
+        +createPet()
+    }
+
+    class Pet {
+        -name: String
+        -species: String
+        -tasks: Task[]
+        +createTask() Task
+        +displayTasks()
+        +updateTask() Task
+        +deleteTask()
+    }
+
+    class Task {
+        -title: String
+        -pet: Pet
+        -duration: int
+        -priority: String
+        -completionStatus: boolean
+        -dueDate: Date
+        +changeDuration() Task
+        +changePriority() Task
+        +changeCompletionStatus() Task
+    }
+
+    class Scheduler {
+        -schedule: Task[]
+        -pets: Pet[]
+        +createSchedule() Schedule
+        +displaySchedule()
+        +updateSchedule() Schedule
+        +deleteSchedule()
+        +getTasks() Task[]
+        +sortTasks() Task[]
+        +filterTasks() Task[]
+    }
+
+    Owner "1" --> "*" Pet : owns
+    Owner "1" --> "1" Scheduler : uses
+    Pet "1" --> "*" Task : has
+    Task "many" --> "1" Pet : belongs to
+    Scheduler "1" --> "*" Pet : manages
+    Scheduler "1" --> "*" Task : tracks
+    Task "many" --> "1" Scheduler : reports to
