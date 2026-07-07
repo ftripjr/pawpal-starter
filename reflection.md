@@ -15,6 +15,19 @@ Owner Three Core Actions:
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
+I chose to add the following classes:
+
+- Owner
+- Pet
+- Task
+- Scheduler
+
+Owner has a name and list of Pets, which they can create, modify, and delete. Owners can also give Pets to the Scheduler to generate a Schedule for.
+
+Pets have Names, Species, and can create tasks with priority levels, durations, due dates, and completion statuses. When the status of a Task changes for a Pet in the Schedule, the Scheduler updates the particular Task.
+
+Schedulers read, organize, and manage Tasks for given Pets. The display the tasks for the user to see.
+
 **b. Design changes**
 
 - Did your design change during implementation?

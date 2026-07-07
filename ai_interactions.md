@@ -37,7 +37,11 @@ Initially I had some difficulty with the agent, as it took some time to figure o
 
 Prompt 2 - "Generate the skeletons of my classes in @pawpal_system.py . The classes should be based on the UML draft, @diagrams/uml_draft.mmd. "
 
-The agent was able to create the skeletons needed and even added hints to the method declarations. This was my first exposure to hints in Python and I found them very useful. I think I'll implement them in my Python projects from now on. 
+The agent was able to create the skeletons needed and even added hints to the method declarations. This was my first exposure to hints in Python and I found them very useful. I think I'll implement them in my Python projects from now on.
+
+Prompt 3 - "Check  the skeletons for our classes in @pawpal_system.py  and take note of any missing relationships or potential logic bottlenecks."
+
+The agent was able to create the skeletons needed and even added hints to the method declarations. This was my first exposure to hints in Python and I found them very useful. I think I'll implement them in my Python projects from now on. I also found myself noticing that I'm missing things I thought I picked up in initial review of AI design. I do like that AI can evaluate itself a bit, but I wish i had picked some of these issues up before it found them.
 
 ## Prompt Comparison (SF11)
 
