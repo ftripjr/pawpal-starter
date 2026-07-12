@@ -1,26 +1,26 @@
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List
 
 
+@dataclass
 class Task:
-    def __init__(self, description: str, duration: int, priority: str,
-                 frequency: str, deadline: datetime, completion_status: bool = False):
-        self.description = description
-        self.duration = duration
-        self.priority = priority
-        self.frequency = frequency
-        self.deadline = deadline
-        self.completion_status = completion_status
+    description: str
+    duration: int
+    priority: str
+    frequency: str
+    deadline: datetime
+    completion_status: bool = False
 
     def is_complete(self) -> bool:
         pass
 
 
+@dataclass
 class Pet:
-    def __init__(self, name: str, species: str):
-        self.name = name
-        self.species = species
-        self.tasks: List[Task] = []
+    name: str
+    species: str
+    tasks: List[Task] = field(default_factory=list)
 
     def add_task(self, task: Task) -> None:
         pass

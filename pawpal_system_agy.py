@@ -1,39 +1,32 @@
 from typing import List, Optional
 from datetime import datetime
+from dataclasses import dataclass, field
 
+@dataclass
 class Task:
     """
     Represents a pet care task (e.g., walk, feeding, meds, grooming).
     """
-    def __init__(
-        self,
-        description: str,
-        duration: int,
-        priority: str,
-        frequency: str,
-        deadline: datetime,
-        completion_status: bool = False
-    ):
-        self.description: str = description
-        self.duration: int = duration
-        self.priority: str = priority
-        self.frequency: str = frequency
-        self.deadline: datetime = deadline
-        self.completion_status: bool = completion_status
+    description: str
+    duration: int
+    priority: str
+    frequency: str
+    deadline: datetime
+    completion_status: bool = False
 
     def is_complete(self) -> bool:
         """Returns True if the task is complete, False otherwise."""
         return self.completion_status
 
 
+@dataclass
 class Pet:
     """
     Represents a pet, containing identifying info and a list of tasks.
     """
-    def __init__(self, name: str, species: str):
-        self.name: str = name
-        self.species: str = species
-        self.tasks: List[Task] = []
+    name: str
+    species: str
+    tasks: List[Task] = field(default_factory=list)
 
     def add_task(self, task: Task) -> None:
         """Adds a task to the pet's list of tasks."""
