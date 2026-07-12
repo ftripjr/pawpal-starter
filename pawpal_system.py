@@ -85,13 +85,14 @@ class Scheduler:
     def __init__(self, scheduler_admin: Owner):
         self.scheduler_admin: Owner = scheduler_admin
         self.pets: List[Pet] = []
-        self.schedule: List[Task] = []
+        self.schedule: dict[Pet, Task] = ()
 
-    def create_schedule(self, pets: List[Pet]) -> List[Task]:
+    def create_schedule(self) -> dict[Pet, List[Task]]:
         """Generates a schedule based on the list of pets and their tasks."""
-        for pet in self.scheduler_admin.pets:
-            self.schedule.extend(pet.get_tasks())
-        return self.schedule
+        my_schedule = dict()
+        for pet in self.pets:
+            my_schedule(pet.name) = pet.get_tasks()
+        return my_schedule
 
     def get_schedule(self): #:
         """Returns the current generated schedule."""
