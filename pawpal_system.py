@@ -1,77 +1,81 @@
-# This file is the logic layer for PawPal+.
-from datetime import date
-from typing import List, Optional
+from datetime import datetime
+from typing import List
 
 
-class Owner:
-    def __init__(self, name: str):
-        self.name: str = name
-        self.pets: List[Pet] = []
-        self.scheduler: Optional['Scheduler'] = None
+class Task:
+    def __init__(self, description: str, duration: int, priority: str,
+                 frequency: str, deadline: datetime, completion_status: bool = False):
+        self.description = description
+        self.duration = duration
+        self.priority = priority
+        self.frequency = frequency
+        self.deadline = deadline
+        self.completion_status = completion_status
 
-    def update_owner_info(self, name: str) -> None:
-        pass
-
-    def create_pet(self, name: str, species: str) -> Pet:
-        pass
-
-    def create_scheduler(self, pets: List['Pet']) -> 'Scheduler':
+    def is_complete(self) -> bool:
         pass
 
 
 class Pet:
-    def __init__(self, name: str, species: str, owner: Owner):
-        self.name: str = name
-        self.species: str = species
-        self.owner: Owner = owner
+    def __init__(self, name: str, species: str):
+        self.name = name
+        self.species = species
         self.tasks: List[Task] = []
 
-    def create_task(self, title: str, duration: int, priority: str, due_date: date) -> Task:
+    def add_task(self, task: Task) -> None:
         pass
 
-    def display_tasks(self) -> None:
+    def get_tasks(self) -> List[Task]:
         pass
 
-    def update_task(self, task: Task, title: Optional[str] = None, duration: Optional[int] = None,
-                    priority: Optional[str] = None, due_date: Optional[date] = None) -> Task:
+    def update_task(self, task: Task) -> None:
         pass
 
     def delete_task(self, task: Task) -> None:
         pass
 
 
-class Task:
-    def __init__(self, title: str, pet: Pet, duration: int, priority: str, due_date: date):
-        self.title: str = title
-        self.pet: Pet = pet
-        self.duration: int = duration
-        self.priority: str = priority
-        self.completion_status: bool = False
-        self.due_date: date = due_date
+class Owner:
+    def __init__(self, name: str):
+        self.name = name
+        self.pets: List[Pet] = []
 
-    def change_duration(self, duration: int) -> Task:
+    def update_owner(self) -> None:
         pass
-
-    def change_priority(self, priority: str) -> Task:
-        pass
-
-    def change_completion_status(self, completion_status: bool) -> Task:
-        pass
-
-
-class Scheduler:
-    def __init__(self, owner: Owner, pets: List[Pet]):
-        self.owner: Owner = owner
-        self.pets: List[Pet] = pets
 
     def add_pet(self, pet: Pet) -> None:
         pass
 
-    def get_tasks(self, pets: Optional[List[Pet]] = None) -> List[Task]:
+    def get_pet(self, name: str) -> Pet:
         pass
 
-    def sort_tasks(self, pets: Optional[List[Pet]] = None, sort_by: str = "due_date") -> List[Task]:
+    def update_pet(self, pet: Pet) -> None:
         pass
 
-    def filter_tasks(self, pets: Optional[List[Pet]] = None, filter_by: str = "priority") -> List[Task]:
+    def delete_pet(self, pet: Pet) -> None:
+        pass
+
+
+class Scheduler:
+    def __init__(self, scheduler_admin: Owner):
+        self.scheduler_admin = scheduler_admin
+        self.pets: List[Pet] = []
+        self.schedule: List[Task] = []
+
+    def create_schedule(self, pets: List[Pet]) -> None:
+        pass
+
+    def get_schedule(self) -> List[Task]:
+        pass
+
+    def update_pet(self, pet: Pet) -> None:
+        pass
+
+    def get_tasks(self, pets: List[Pet]) -> List[Task]:
+        pass
+
+    def sort_tasks(self, pets: List[Pet]) -> List[Task]:
+        pass
+
+    def filter_tasks(self, pets: List[Pet]) -> List[Task]:
         pass
