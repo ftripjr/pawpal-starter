@@ -12,12 +12,16 @@
 
 <!-- Describe the goal you asked the agent to accomplish -->
 
-Prompt 1 - "I'm creating a Pet Care App with four classes - `Owner`, `Pet`, `Task`, and `Scheduler`. Create a mermaid.js class diagram based on @README.md  and the brainstormed attributes, methods, and relationships of each class in  @pawpal-plus-building-blocks.md ."
+Prompt 1 - "I'm creating a Pet Care App with four classes -  `Task`, `Pet`, `Owner`, and `Scheduler`. Create a mermaid.js class diagram based on @README.md  and the brainstormed attributes, methods, and relationships of each class in  @pawpal-plus-building-blocks.md ."
 
 **What did the agent do?**
 
 <!-- List the steps the agent took (files edited, commands run, etc.) -->
-The agent attemptef to create a Mermaid class diagram from building blocks but failed to generate an artifact to hold that data. On new attempt, it created an HTML file with the class diagram inside of the body of the HTML. It then would ask to input without displaying the suggested code. 
+A note on the process for both of these was that the ordering of the building blocks mattered greatly in how the UML and skeletons were designed. I originally had the order of classes as "`Owner`, `Pet`, `Task`, and `Scheduler`" instead of "`Task`, `Pet`, `Owner`, and `Scheduler`". This impacted the design of the UML and the skeletons, so I had to change the order of classes in my prompts.
+
+Claude Code attempted to create a Mermaid class diagram from building blocks but failed to generate an artifact to hold that data. On new attempt, it created an HTML file with the class diagram inside of the body of the HTML. It then would ask to input without displaying the suggested code. After a few attempts, I was able to get it to more closely match the syntax in the starter code for `[diagrams/uml.mmd](/diagrams/uml.mmd)`.
+
+Google Antigravity (formerly Gemini Code Assist) was able to pick up my needs pretty quickly. It matched the formatting in `[diagrams/uml.mmd](/diagrams/uml.mmd)` without me having to do much to influence it.
 
 **What did you have to verify or fix manually?**
 
@@ -37,9 +41,11 @@ Initially I had some difficulty with the agent, as it took some time to figure o
 
 Prompt 2 - "Generate the skeletons of my classes in @pawpal_system.py . The classes should be based on the UML draft, @diagrams/uml_draft.mmd. "
 
-The agent was able to create the skeletons needed and even added hints to the method declarations. This was my first exposure to hints in Python and I found them very useful. I think I'll implement them in my Python projects from now on.
+Claude Code was able to create the skeletons needed and even added hints to the method declarations. This was my first exposure to hints in Python and I found them very useful. I think I'll implement them in my Python projects from now on.
 
-Prompt 3 - "Check  the skeletons for our classes in @pawpal_system.py  and take note of any missing relationships or potential logic bottlenecks."
+Google Antigravity (formerly Gemini Code Assist)
+
+Prompt 3 - "Check the skeletons for our classes in @pawpal_system.py  and take note of any missing relationships or potential logic bottlenecks."
 
 The agent was able to create the skeletons needed and even added hints to the method declarations. This was my first exposure to hints in Python and I found them very useful. I think I'll implement them in my Python projects from now on. I also found myself noticing that I'm missing things I thought I picked up in initial review of AI design. I do like that AI can evaluate itself a bit, but I wish i had picked some of these issues up before it found them.
 
