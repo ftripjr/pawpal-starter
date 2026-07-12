@@ -1,0 +1,52 @@
+classDiagram
+    class Task {
+        +string description
+        +int duration
+        +string priority
+        +string frequency
+        +datetime deadline
+        +bool completion_status
+        +is_complete() bool
+    }
+
+    class Pet {
+        +string name
+        +string species
+        +List~Task~ tasks
+        +add_task(task: Task) void
+        +get_tasks() List~Task~
+        +update_task(task: Task) void
+        +delete_task(task: Task) void
+    }
+
+    class Owner {
+        +string name
+        +List~Pet~ pets
+        +update_owner() void
+        +add_pet(pet: Pet) void
+        +get_pet(name: string) Pet
+        +update_pet(pet: Pet) void
+        +delete_pet(pet: Pet) void
+    }
+
+    class Scheduler {
+        +Owner scheduler_admin
+        +List~Pet~ pets
+        +List~Task~ schedule
+        +create_schedule(pets: List~Pet~) List~Task~
+        +get_schedule() List~Task~
+        +update_pet(pet: Pet) void
+        +get_tasks(pets: List~Pet~) List~Task~
+        +sort_tasks(pets: List~Pet~) List~Task~
+        +filter_tasks(pets: List~Pet~) List~Task~
+    }
+
+    %% Relationships
+    Task "0..*" --> "1" Pet : belongs to
+    Pet "1" --> "0..*" Task : has
+    Pet "0..*" --> "1" Owner : belongs to
+    Owner "1" --> "0..*" Pet : cares for
+    Owner "1" --> "1" Scheduler : uses
+    Scheduler "1" --> "1" Owner : talks with
+    Scheduler "1" --> "0..*" Pet : manages
+    Pet "0..*" --> "1" Scheduler : is managed by

@@ -1,0 +1,50 @@
+classDiagram
+    class Task {
+        -description: string
+        -duration: int
+        -priority: string
+        -frequency: string
+        -deadline: datetime
+        -completion_status: bool
+        +is_complete() bool
+    }
+
+    class Pet {
+        -name: string
+        -species: string
+        -tasks: List~Task~
+        +add_task(Task)
+        +get_tasks() List~Task~
+        +update_task(Task)
+        +delete_task(Task)
+    }
+
+    class Owner {
+        -name: string
+        -pets: List~Pet~
+        +update_owner()
+        +add_pet(Pet)
+        +get_pet(string) Pet
+        +update_pet(Pet)
+        +delete_pet(Pet)
+    }
+
+    class Scheduler {
+        -scheduler_admin: Owner
+        -pets: List~Pet~
+        -schedule: List~Task~
+        +create_schedule(List~Pet~)
+        +get_schedule() List~Task~
+        +update_pet(Pet)
+        +get_tasks(List~Pet~) List~Task~
+        +sort_tasks(List~Pet~) List~Task~
+        +filter_tasks(List~Pet~) List~Task~
+    }
+
+    Pet "1" -- "0..*" Task : contains
+    Owner "1" -- "0..*" Pet : cares for
+    Pet "0..*" -- "1" Owner : belongs to
+    Pet "0..*" -- "1" Scheduler : is managed by
+    Owner "1" -- "1" Scheduler : uses
+    Scheduler "1" -- "0..*" Pet : manages
+    Scheduler "1" -- "1" Owner : talks with
