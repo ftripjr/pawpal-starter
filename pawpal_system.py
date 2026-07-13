@@ -91,7 +91,7 @@ class Scheduler:
         """Generates a schedule based on the list of pets and their tasks."""
         my_schedule = dict()
         for pet in self.pets:
-            my_schedule(pet.name) = pet.get_tasks()
+            my_schedule[pet.name] = pet.get_tasks()
         return my_schedule
 
     def get_schedule(self): #:
@@ -101,7 +101,7 @@ class Scheduler:
             pet_tasks = {pet.name: pet.get_tasks()}
         
         for pet in pet_tasks:
-            print(f"{pet} - {pet[1].description}")
+            print(f"Pet -> {pet}\n")
 
 
     def update_pet(self, pet: Pet) -> None:
