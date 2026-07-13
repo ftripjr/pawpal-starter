@@ -19,6 +19,10 @@ class Task:
         """Returns True if the task is complete, False otherwise."""
         return self.completion_status
     
+    def mark_complete(self) -> None:
+        """Returns True if the task is complete, False otherwise."""
+        self.completion_status = not self.completion_status
+
 @dataclass
 class Pet:
     """
@@ -36,10 +40,6 @@ class Pet:
         """Returns the list of tasks for this pet."""
         return self.tasks
 
-    def update_task(self, task: Task) -> None:
-        """Updates an existing task."""
-        pass
-
     def delete_task(self, task: Task) -> None:
         """Deletes a task from the pet's list of tasks."""
         if task in self.tasks:
@@ -53,9 +53,9 @@ class Owner:
         self.name: str = name
         self.pets: List[Pet] = []
 
-    def update_owner(self) -> None:
+    def update_owner(self, new_name: str) -> None:
         """Updates the owner's details."""
-        pass
+        self.name = new_name
 
     def add_pet(self, pet: Pet) -> None:
         """Adds a pet to the owner's list of pets."""
@@ -67,10 +67,6 @@ class Owner:
             if pet.name == name:
                 return pet
         return None
-
-    def update_pet(self, pet: Pet) -> None:
-        """Updates a pet's information."""
-        pass
 
     def delete_pet(self, pet: Pet) -> None:
         """Deletes a pet from the owner's list of pets."""
@@ -85,32 +81,46 @@ class Scheduler:
     def __init__(self, scheduler_admin: Owner):
         self.scheduler_admin: Owner = scheduler_admin
         self.pets: List[Pet] = []
-        self.schedule: dict[Pet, Task] = ()
+        self.schedule: List[Task] = []
 
-    def create_schedule(self) -> dict[Pet, List[Task]]:
+    def create_schedule(self, pets: List[Pet]) -> List[Task]:
         """Generates a schedule based on the list of pets and their tasks."""
-        my_schedule = dict()
-        for pet in self.pets:
-            my_schedule[pet.name] = pet.get_tasks()
-        return my_schedule
-
-    def get_schedule(self): #:
-        """Returns the current generated schedule."""
-        print("Today's Schedule")
         for pet in self.scheduler_admin.pets:
-            pet_tasks = {pet.name: pet.get_tasks()}
-        
-        for pet in pet_tasks:
-            print(f"Pet -> {pet}\n")
+            self.schedule.extend(pet.get_tasks())
+        return self.schedule
 
+    def get_schedule(self) -> None:
+        """Returns formatted schedule grouped by pet and priority."""
+        output = []
+        output.append("Today's Schedule\n--------------------\n")
+        for pet in self.scheduler_admin.pets:
+            pet_emoji = '🐕' if pet.species.lower() == 'dog' else '🐈' if pet.species.lower() == 'cat' else '🐾'
+            output.append(f"{pet_emoji} {pet.name}")
+            tasks = pet.get_tasks()
 
-    def update_pet(self, pet: Pet) -> None:
-        """Updates the schedule with the latest info for a pet."""
-        pass
+            if not tasks:
+                output.append("  (no tasks)")
+                continue
 
-    def get_tasks(self, pets: List[Pet]) -> List[Task]:
-        """Gathers all tasks for the list of pets."""
-        return []
+            # Group by priority
+            by_priority = {}
+            for task in tasks:
+                if task.priority not in by_priority:
+                    by_priority[task.priority] = []
+                by_priority[task.priority].append(task)
+
+            # Format each priority group (urgent, high, Medium, Low)
+            priority_order = ['urgent', 'high', 'medium', 'low']
+            for priority in priority_order:
+                if priority in by_priority:
+                    total_duration = sum(t.duration for t in by_priority[priority])
+                    emoji = '🚨' if priority.lower() == 'urgent' else '🔴' if priority.lower() == 'high' else '🟡' if priority.lower() == 'medium' else '🟢'
+                    output.append(f"  {emoji} {priority.upper()} ({total_duration} min)")
+                    for task in by_priority[priority]:
+                        status = "☑" if task.is_complete() else "☐"
+                        output.append(f"    • {task.description} — {task.duration} min {status}")
+
+        print("\n".join(output))
 
     def sort_tasks(self, pets: List[Pet]) -> List[Task]:
         """Sorts tasks by criteria such as priority, duration, or frequency."""

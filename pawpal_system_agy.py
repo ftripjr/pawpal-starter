@@ -69,6 +69,10 @@ class Owner:
                 return pet
         return None
 
+    def get_pets(self) -> Optional[Pet]:
+        """Retrieves all pets."""
+        return self.pets
+    
     def update_pet(self, pet: Pet) -> None:
         """Updates a pet's information."""
         pass
@@ -88,9 +92,12 @@ class Scheduler:
         self.pets: List[Pet] = []
         self.schedule: List[Task] = []
 
-    def create_schedule(self, pets: List[Pet]) -> List[Task]:
+    def create_schedule(self) -> dict[Pet, List[Task]]:
         """Generates a schedule based on the list of pets and their tasks."""
-        return []
+        my_schedule = dict()
+        for pet in self.pets:
+            my_schedule(pet.name) = pet.get_tasks()
+        return my_schedule
 
     def get_schedule(self) -> List[Task]:
         """Returns the current generated schedule."""
@@ -100,8 +107,11 @@ class Scheduler:
         """Updates the schedule with the latest info for a pet."""
         pass
 
-    def get_tasks(self, pets: List[Pet]) -> List[Task]:
+    def get_tasks(self) -> List[Task]:
         """Gathers all tasks for the list of pets."""
+        owner_pets: Pet = self.scheduler_admin.pets()
+        for pet in owner_pets:
+            owner_pets.extend(pet.get_pets)
         return []
 
     def sort_tasks(self, pets: List[Pet]) -> List[Task]:
